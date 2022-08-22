@@ -13,3 +13,12 @@ h6 {
   margin: 0;
   letter-spacing: -0.015px;
 }
+
+.basic-button button {
+  font-family: 'Open Sans';
+  font-weight: bold;
+  text-align: center;
+  letter-spacing: -0.015px;
+  text-transform: uppercase;
+  background-color: #ffc700;
+}
