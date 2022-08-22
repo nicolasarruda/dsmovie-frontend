@@ -1,9 +1,9 @@
 import './assets/styles/custom.scss';
-import Navbar from 'components/Navbar';
 import './App.css';
+import Login from 'pages/Login';
 
 function App() {
-  return <Navbar />;
+  return <Login />;
 }
 
 export default App;
