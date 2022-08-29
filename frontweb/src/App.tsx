@@ -1,9 +1,9 @@
 import './assets/styles/custom.scss';
 import './App.css';
-import Login from 'pages/Login';
+import Routes from 'Routes';
 
 function App() {
-  return <Login />;
+  return <Routes />;
 }
 
 export default App;
