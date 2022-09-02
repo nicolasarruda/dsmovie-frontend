@@ -37,7 +37,7 @@ public class ReviewService {
 		Review entity = new Review();
 		copyToDto(entity, dto);
 		entity = repository.save(entity);
-		return new ReviewDTO(entity, entity.getUser());
+		return new ReviewDTO(entity);
 	}
 
 	private void copyToDto(Review entity, ReviewDTO dto) {

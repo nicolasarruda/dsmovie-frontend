@@ -2,15 +2,17 @@ import Button from 'components/Button';
 import StarImage from '../../../assets/images/star.png';
 import './styles.css';
 
-const PrivateRouteDetails = () => {
+const MovieDetails = () => {
   return (
     <div className="container-details">
       <div className="container-title">
         <h1>Tela detalhes do filme id: 1</h1>
-        <div className="container-input bg-secondary">
-          <input type="text" placeholder="Deixe sua avaliação aqui" />
-          <Button name="Salvar Avaliação" />
-        </div>
+        <form>
+          <div className="container-input bg-secondary">
+            <input type="text" placeholder="Deixe sua avaliação aqui" />
+            <Button name="Salvar Avaliação" />
+          </div>
+        </form>
       </div>
       <div className="container-post bg-secondary">
         <div className="individual-container-post">
@@ -39,4 +41,4 @@ const PrivateRouteDetails = () => {
   );
 };
 
-export default PrivateRouteDetails;
+export default MovieDetails;

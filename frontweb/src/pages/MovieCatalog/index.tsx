@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import './styles.css';
 
-const PrivateRoute = () => {
+const MovieCatalog = () => {
   return (
     <div className="list-movies-container">
       <h1>Tela listagem de filmes</h1>
@@ -15,4 +15,4 @@ const PrivateRoute = () => {
   );
 };
 
-export default PrivateRoute;
+export default MovieCatalog;

@@ -56,6 +56,8 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 		.authorizedGrantTypes("password", "refresh_token")
 		.accessTokenValiditySeconds(jwtDuration)
 		.refreshTokenValiditySeconds(jwtDuration);
+		
+		
 	}
 
 	@Override

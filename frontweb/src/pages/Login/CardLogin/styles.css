@@ -56,8 +56,16 @@
   }
 
   .btn-login button {
-    margin-top: 75px;
+    margin-top: calc(75px - x);
     width: 384px;
     height: 65px;
   }
+}
+
+.alert {
+  margin-top: 5px;
+}
+
+.d-block {
+  margin-top: 5px;
 }
