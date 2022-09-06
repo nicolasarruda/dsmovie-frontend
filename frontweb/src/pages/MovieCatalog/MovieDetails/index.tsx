@@ -1,44 +1,56 @@
-import Button from 'components/Button';
-import StarImage from '../../../assets/images/star.png';
+import { AxiosRequestConfig } from 'axios';
+import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { requestBackEnd } from 'utils/requests';
 import './styles.css';
+import { Review } from 'types/review';
+import ReviewForm from 'components/ReviewForm';
+import { hasAnyRoles } from '../../../utils/auth';
+import ReviewList from 'components/ReviewList';
+
+type UrlParams = {
+  movieId: string;
+};
 
 const MovieDetails = () => {
+  const { movieId } = useParams<UrlParams>();
+
+  const [reviews, setReviews] = useState<Review[]>([]);
+
+  useEffect(() => {
+    const config: AxiosRequestConfig = {
+      method: 'GET',
+      url: `/movies/${movieId}/reviews`,
+      withCredentials: true,
+    };
+    requestBackEnd(config)
+      .then((response) => {
+        setReviews(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, [movieId]);
+
+  const handleInsertReview = (review: Review) => {
+    const clone = [...reviews];
+    clone.push(review);
+    setReviews(clone);
+  };
+
   return (
     <div className="container-details">
       <div className="container-title">
-        <h1>Tela detalhes do filme id: 1</h1>
-        <form>
-          <div className="container-input bg-secondary">
-            <input type="text" placeholder="Deixe sua avaliação aqui" />
-            <Button name="Salvar Avaliação" />
-          </div>
-        </form>
-      </div>
-      <div className="container-post bg-secondary">
-        <div className="individual-container-post">
-          <img src={StarImage} alt="estrela" />
-          <h1>Maria Silva</h1>
-          <p>
-            Gostei muito do filme. Foi muito bom mesmo. Pena que durou pouco.
-          </p>
-        </div>
-        <div className="individual-container-post">
-          <img src={StarImage} alt="estrela" />
-          <h1>Maria Silva</h1>
-          <p>
-            Gostei muito do filme. Foi muito bom mesmo. Pena que durou pouco.
-          </p>
-        </div>
-        <div className="individual-container-post">
-          <img src={StarImage} alt="estrela" />
-          <h1>Maria Silva</h1>
-          <p>
-            Gostei muito do filme. Foi muito bom mesmo. Pena que durou pouco.
-          </p>
-        </div>
+        <h1>Tela detalhes do filme id: {movieId}</h1>
+        {hasAnyRoles(['ROLE_MEMBER']) && (
+          <ReviewForm movieId={movieId} onInsertReview={handleInsertReview} />
+        )}
+        <ReviewList reviews={reviews} />
       </div>
     </div>
   );
 };
 
 export default MovieDetails;
+
+// <ReviewList reviews={review} />

@@ -11,7 +11,6 @@ const PrivateRoute = ({ children, path }: Props) => {
     <Route
       path={path}
       render={({ location }) =>
-        // || error.response.status === 403
         !isAuthenticated() ? (
           <Redirect
             to={{

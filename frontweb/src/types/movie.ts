@@ -1,4 +1,4 @@
-import { Review } from './reviews';
+import { Review } from './review';
 
 export type Movie = {
   id: number;
@@ -8,7 +8,3 @@ export type Movie = {
   year: number;
   reviews: Review[];
 };
-
-// for (var letter of 'Brasil') {
-//   console.log(letter);
-// }

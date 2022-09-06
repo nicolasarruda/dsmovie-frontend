@@ -18,7 +18,7 @@ type LocationState = {
 const CardLogin = () => {
   const location = useLocation<LocationState>();
 
-  const { from } = location.state || { from: { pathname: '/' } };
+  const { from } = location.state || { from: { pathname: '/movies' } };
 
   const [hasError, setHasError] = useState(false);
 
@@ -36,7 +36,7 @@ const CardLogin = () => {
         saveAuthData(response.data);
         setHasError(false);
         console.log('SUCESSO', response);
-        history.push(from);
+        history.replace(from);
       })
       .catch((error) => {
         setHasError(true);
