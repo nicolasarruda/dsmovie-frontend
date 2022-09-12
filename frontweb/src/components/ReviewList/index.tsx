@@ -1,23 +1,32 @@
-import StarImage from '../../assets/images/star.png';
 import { Review } from '../../types/review';
+import StarImage from '../../assets/images/star.png';
 
 type Props = {
-  reviews: Review[];
+  review: Review;
 };
 
-const ReviewList = ({ reviews }: Props) => {
-  const name = reviews.map((review) => review.user.name);
-  const text = reviews.map((review) => review.text);
-
+const ReviewList = ({ review }: Props) => {
   return (
     <div className="container-post bg-secondary">
       <div className="individual-container-post">
         <img src={StarImage} alt="estrela" />
-        <h1>{name}</h1>
-        <p>{text}</p>
+        <h1>{review.user.name}</h1>
+        <p>{review.text}</p>
       </div>
     </div>
   );
 };
 
 export default ReviewList;
+
+// return reviews.map((review) => {
+//   return (
+//     <div key={review.id} className="container-post bg-secondary">
+//       <div className="individual-container-post">
+//         <img src={StarImage} alt="estrela" />
+//         <h1>{review.user.name}</h1>
+//         <p>{review.text}</p>
+//       </div>
+//     </div>
+//   );
+// });

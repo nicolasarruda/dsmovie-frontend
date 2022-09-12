@@ -32,11 +32,15 @@ const ReviewForm = ({ movieId, onInsertReview }: Props) => {
       withCredentials: true,
     };
 
-    requestBackEnd(config).then((response) => {
-      setValue('text', '');
-      console.log('SUCESSO AO SALVAR', response);
-      onInsertReview(response.data);
-    });
+    requestBackEnd(config)
+      .then((response) => {
+        console.log('SUCESSO AO SALVAR', response);
+        onInsertReview(response.data);
+        setValue('text', '');
+      })
+      .catch((error) => {
+        console.log('ERRO', error);
+      });
   };
 
   return (

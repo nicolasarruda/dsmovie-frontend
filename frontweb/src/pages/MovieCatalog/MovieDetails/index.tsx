@@ -2,10 +2,11 @@ import { AxiosRequestConfig } from 'axios';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { requestBackEnd } from 'utils/requests';
-import './styles.css';
 import { Review } from 'types/review';
 import ReviewForm from 'components/ReviewForm';
-import { hasAnyRoles } from '../../../utils/auth';
+import { hasAnyRoles, isAuthenticated } from '../../../utils/auth';
+import StarImage from '../../../assets/images/star.png';
+import './styles.css';
 import ReviewList from 'components/ReviewList';
 
 type UrlParams = {
@@ -23,6 +24,7 @@ const MovieDetails = () => {
       url: `/movies/${movieId}/reviews`,
       withCredentials: true,
     };
+
     requestBackEnd(config)
       .then((response) => {
         setReviews(response.data);
@@ -33,6 +35,9 @@ const MovieDetails = () => {
   }, [movieId]);
 
   const handleInsertReview = (review: Review) => {
+    console.log('ESTOU NO HANDLE INSERT REVIEW');
+    console.log(reviews);
+    console.log('SÓ UM REVIEW', review);
     const clone = [...reviews];
     clone.push(review);
     setReviews(clone);
@@ -45,7 +50,10 @@ const MovieDetails = () => {
         {hasAnyRoles(['ROLE_MEMBER']) && (
           <ReviewForm movieId={movieId} onInsertReview={handleInsertReview} />
         )}
-        <ReviewList reviews={reviews} />
+
+        {reviews.map((review) => {
+          return <ReviewList review={review} />;
+        })}
       </div>
     </div>
   );
@@ -54,3 +62,15 @@ const MovieDetails = () => {
 export default MovieDetails;
 
 // <ReviewList reviews={review} />
+
+// {/* reviews.map((review) => {
+//     return (
+//       <div key={review.movieId} className="container-post bg-secondary">
+//         <div className="individual-container-post">
+//           <img src={StarImage} alt="estrela" />
+//           <h1>{review.user.name}</h1>
+//           <p>{review.text}</p>
+//         </div>
+//       </div>
+//     );
+//   })} */}
